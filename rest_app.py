@@ -1,5 +1,7 @@
-from flask import Flask, request
+import os
+import signal
 
+from flask import Flask, request
 from db_connector import get_user, post_user, update_user, delete_user
 
 app = Flask(__name__)
@@ -65,3 +67,9 @@ def user(user_id):
 
 
 app.run(host='127.0.0.1', debug=True, port=5000)
+
+
+@app.route('/stop_server')
+def stop_server():
+    os.kill(os.getpid(), signal.CTRL_C_EVENT)
+    return 'Server stopped'
