@@ -6,14 +6,19 @@ pipeline {
 				git 'https://github.com/basharE/pythonFirstProject.git'
 			}
 		}
+		stage('install required packages') {
+		    steps {
+		        sh 'pip install flask'
+		    }
+		}
 		stage('Run backend') {
 			steps {
-				sh ' nohup python rest_app.py &'
+				sh 'nohup python rest_app.py &'
 			}
 		}
 		stage('Run frontend') {
 			steps {
-				sh ' nohup python web_app.py &'
+				sh 'nohup python web_app.py &'
 			}
 		}
 		stage('Run backend testing') {
