@@ -8,6 +8,7 @@ pipeline {
 		}
 		stage ("Install Application Dependencies") {
             steps {
+                sh 'virtualenv --no-site-packages .'
                 sh '''
                     source bin/activate
                     pip install -r requirements.txt
