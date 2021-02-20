@@ -7,11 +7,13 @@ pipeline {
 			}
 		}
 		stage ("Install Application Dependencies") {
-        sh '''
-            source bin/activate
-            pip install -r requirements.txt
-            deactivate
-           '''
+            steps {
+                sh '''
+                    source bin/activate
+                    pip install -r requirements.txt
+                    deactivate
+                   '''
+           }
         }
 		stage('Run backend') {
 			steps {
