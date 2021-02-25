@@ -3,6 +3,9 @@ pipeline {
 	environment {
         PYTHONPATH = "/Users/basharegbariya/venv/Python3.8/lib"
     }
+    triggers {
+        pollSCM 'H/3 * * * *'
+    }
 	stages {
 		stage('Pull code from your Github repository') {
 			steps {
