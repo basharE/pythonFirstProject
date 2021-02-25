@@ -1,8 +1,8 @@
 pipeline {
 	agent any
-	environment {
-        PYTHONPATH = "/Users/basharegbariya/venv/Python3.8/lib"
-    }
+// 	environment {
+//         PYTHONPATH = "/Users/basharegbariya/venv/Python3.8/lib"
+//     }
     triggers {
         pollSCM 'H/15 * * * *'
     }
