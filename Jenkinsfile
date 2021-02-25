@@ -1,18 +1,18 @@
 pipeline {
 	agent any
+	environment {
+        PYTHONPATH = "/Users/basharegbariya/venv/Python3.8/lib"
+    }
 	stages {
 		stage('Pull code from your Github repository') {
 			steps {
 				git 'https://github.com/basharE/pythonFirstProject.git'
 			}
 		}
-		stage ("Install Application Dependencies") {
+		stage('install_dependencies') {
             steps {
-                sh '''
-                    pip install -r requirements.txt
-                    deactivate
-                   '''
-           }
+                sh 'pip3 install flask requests selenium pymysql -t ./'
+            }
         }
 		stage('Run backend') {
 			steps {
@@ -26,22 +26,22 @@ pipeline {
 		}
 		stage('Run backend testing') {
 			steps {
-				sh 'python backend_testing.py'
+				sh 'nohup python backend_testing.py &'
 			}
 		}
 		stage('Run frontend testing') {
 			steps {
-				sh 'python frontend_testing.py'
+				sh 'nohup python frontend_testing.py &'
 			}
 		}
 		stage('Run combined testing') {
 			steps {
-				sh 'python compined_testing.py'
+				sh 'nohup python compined_testing.py &'
 			}
 		}
 		stage('clean environemnt') {
 			steps {
-				sh 'python clean_environment.py'
+				sh 'nohup python clean_environment.py &'
 			}
 		}
 	}

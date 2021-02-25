@@ -2,7 +2,7 @@ import os
 import signal
 
 from flask import Flask
-from db_connector import get_user
+from db_connector import get_user, post_user, update_user, delete_user
 
 app = Flask(__name__)
 
@@ -22,10 +22,10 @@ def get_user_name(user_id):
         return "<H1 id='error'> no such user:" + user_id + "</H1>"
 
 
-app.run(host='127.0.0.1', debug=True, port=5001)
-
-
 @app.route('/stop_server')
 def stop_server():
-    os.kill(os.getpid(), signal.CTRL_C_EVENT)
+    os.kill(os.getpid(), signal.SIGINT)
     return 'Server stopped'
+
+
+app.run(host='127.0.0.1', debug=True, port=5001)
