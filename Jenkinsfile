@@ -1,7 +1,10 @@
 pipeline {
 	agent any
+	options {
+        buildDiscarder(logRotator(daysToKeepStr: '5', numToKeepStr: '20'))
+    }
     triggers {
-        pollSCM 'H/15 * * * *'
+        pollSCM 'H/30 * * * *'
     }
 	stages {
 		stage('Pull code from your Github repository') {
