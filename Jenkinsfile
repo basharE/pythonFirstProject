@@ -38,6 +38,7 @@ pipeline {
 			}
 		}
 		stage('Building our image') {
+		    agent { dockerfile true }
             steps {
                 script {
                     dockerImage = docker.build registry + "1"
@@ -45,6 +46,7 @@ pipeline {
             }
         }
         stage('Deploy our image') {
+            agent { dockerfile true }
             steps {
                 script {
                     docker.withRegistry( '', registryCredential ) {
