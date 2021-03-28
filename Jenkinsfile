@@ -22,14 +22,14 @@ pipeline {
 				sh 'nohup python3 rest_app.py &'
 			}
 		}
-		stage('Run frontend') {
-			steps {
-				sh 'nohup python3 web_app.py &'
-			}
-		}
 		stage('Run backend testing') {
 			steps {
 				sh 'nohup python3 backend_testing.py &'
+			}
+		}
+		stage('Run frontend') {
+			steps {
+				sh 'nohup python3 web_app.py &'
 			}
 		}
 		stage('Run frontend testing') {
