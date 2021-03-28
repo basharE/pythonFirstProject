@@ -27,21 +27,6 @@ pipeline {
 				sh 'nohup python3 backend_testing.py &'
 			}
 		}
-		stage('Run frontend') {
-			steps {
-				sh 'nohup python3 web_app.py &'
-			}
-		}
-		stage('Run frontend testing') {
-			steps {
-				sh 'nohup python3 frontend_testing.py &'
-			}
-		}
-		stage('Run combined testing') {
-			steps {
-				sh 'nohup python3 compined_testing.py &'
-			}
-		}
 		stage('clean environemnt') {
 			steps {
 				sh 'nohup python3 clean_environment.py &'
