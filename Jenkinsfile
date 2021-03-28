@@ -8,7 +8,7 @@ pipeline {
     }
     environment {
         registry = "basharegbariya/flask_postgres_py"
-        registryCredential = 'basharegbariya'
+        registryCredential = 'e.bashar.t@gmail.com'
         dockerImage = ''
     }
 	stages {
