@@ -37,20 +37,12 @@ pipeline {
 				sh 'nohup python3 clean_environment.py &'
 			}
 		}
-		stage('Building our image') {
-		    agent { dockerfile true }
+		stage('Building image') {
             steps {
                 script {
-                    dockerImage = docker.build registry + "1"
-                }
-            }
-        }
-        stage('Deploy our image') {
-            agent { dockerfile true }
-            steps {
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
+                    dockerImage = docker.build registry
+                    docker.withRegistry('', registryCredential) {
+                    dockerImage.push() // push image to hub
                     }
                 }
             }
