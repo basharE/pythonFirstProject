@@ -1,21 +1,19 @@
 ---
 services:
-  db:
-    environment:
-      MYSQL_DATABASE: db
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_USER: user
-    expose:
-      - "3307"
-    image: "mysql:5.7"
+  database:
+    env_file:
+      - database.env
+    image: postgres
     ports:
-      - "3307:3306"
-    restart: always
+      - 5432:5432
+    volumes:
+      - "database-data:/var/lib/postgresql/data/"
   web:
     build: "."
     depends_on:
-      - db
+      - database
     ports:
       - "5000:5000"
 version: "3"
+volumes:
+  database-data: ~
