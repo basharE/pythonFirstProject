@@ -14,7 +14,7 @@ pipeline {
 		}
 		stage('install_dependencies') {
             steps {
-                sh 'pip3 install flask requests selenium pymysql -t ./'
+                sh 'pip3 install flask requests selenium -t ./'
             }
         }
 		stage('Run backend') {
@@ -22,14 +22,19 @@ pipeline {
 				sh 'nohup python3 rest_app.py &'
 			}
 		}
-		stage('Run frontend') {
-			steps {
-				sh 'nohup python3 web_app.py &'
-			}
-		}
 		stage('Run backend testing') {
 			steps {
 				sh 'nohup python3 backend_testing.py &'
+			}
+		}
+		stage('clean environemnt') {
+			steps {
+				sh 'nohup python3 clean_environment.py &'
+			}
+		}
+		stage('Run frontend') {
+			steps {
+				sh 'nohup python3 web_app.py &'
 			}
 		}
 		stage('Run frontend testing') {
