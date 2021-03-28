@@ -19,7 +19,7 @@ pipeline {
 		}
 		stage('install_dependencies') {
             steps {
-                sh 'pip3 install flask requests selenium pymysql -t ./'
+                sh 'pip3 install flask requests selenium psycopg2-binary -t ./'
             }
         }
 		stage('Run backend') {
